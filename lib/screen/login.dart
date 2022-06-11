@@ -6,12 +6,10 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hidrotec/constants/constants.dart';
 
-
 import '../widget/information.dart';
 import '../widget/socal_buttons.dart';
 
-import 'home.dart';
-import 'logo.dart';
+import '../widget/logo.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -22,12 +20,10 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage>
     with SingleTickerProviderStateMixin {
-
   final nome = TextEditingController();
   final senha = TextEditingController();
 
-
- late  AnimationController _animationController;
+  late AnimationController _animationController;
   bool _isShowSingUp = false;
   late Animation<int> _animationTextRotate;
   late Animation<int> _fontsized;
@@ -35,7 +31,7 @@ class _LoginPageState extends State<LoginPage>
   @override
   Widget build(BuildContext context) {
     final _size = MediaQuery.of(context).size;
-       return Scaffold(
+    return Scaffold(
       body: AnimatedBuilder(
           animation: _animationController,
           builder: (context, snapshot) {
@@ -58,7 +54,6 @@ class _LoginPageState extends State<LoginPage>
                   left: _isShowSingUp ? _size.width * 0.12 : _size.width * 0.88,
                   child: Container(
                     color: signup_bg,
-                   
                   ),
                 ),
                 AnimatedPositioned(
@@ -80,12 +75,8 @@ class _LoginPageState extends State<LoginPage>
                   right:
                       _isShowSingUp ? -_size.width * 0.06 : _size.width * 0.06,
                   bottom: _size.height * 0.1,
-                  child:  SocalButtns(
-
-
-
-
-                    onPressed: _isShowSingUp ?() {} :(){},
+                  child: SocalButtns(
+                    onPressed: _isShowSingUp ? () {} : () {},
                   ),
                 ),
                 AnimatedPositioned(
@@ -175,53 +166,35 @@ class _LoginPageState extends State<LoginPage>
     });
   }
 
-  
-
   @override
   void dispose() {
-
     _animationController.dispose();
     super.dispose();
   }
 
-
-   @override
+  @override
   void initState() {
+    setUpAnimation();
 
-     setUpAnimation();
+    super.initState();
+  }
 
-     super.initState();
-   }
-
-
-
- Future sigIN() async {
-   try {
-     await FirebaseAuth.instance.signInWithEmailAndPassword(
-       email: nome.text.trim(),
-       password: senha.text.trim(),
-     );
-   } on FirebaseAuthException catch (e) {
-     if (e.code == 'user-not-found') {
-       if (kDebugMode) {
-         print('No user found for that email.');
-       }
-     } else if (e.code == 'wrong-password') {
-       if (kDebugMode) {
-         print('Wrong password provided for that user.');
-       }
-     }
-   }
- }
-
-
-
-
-
-
-
-
-
-
-
+  Future sigIN() async {
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: nome.text.trim(),
+        password: senha.text.trim(),
+      );
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        if (kDebugMode) {
+          print('No user found for that email.');
+        }
+      } else if (e.code == 'wrong-password') {
+        if (kDebugMode) {
+          print('Wrong password provided for that user.');
+        }
+      }
+    }
+  }
 }

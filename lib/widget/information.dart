@@ -18,18 +18,12 @@ class Information extends StatefulWidget {
 
 class _InformationState extends State<Information> {
   final _formKey = GlobalKey<FormState>();
-  late String dispositivo = "1003";
-  late String cep = '99400-000';
-  late String cidade = "Espumoso";
-  late String email = "sim datos";
-  late String password = "sim datos";
 
   DatabaseReference database = FirebaseDatabase.instance.ref();
-  final _numberController = TextEditingController();
+  final _dispController = TextEditingController();
   final _cepController = TextEditingController();
   final _cidadeController = TextEditingController();
-  final _emailController = TextEditingController();
-  final _passController = TextEditingController();
+  final _nameController = TextEditingController();
 
   @override
   void initState() {
@@ -48,7 +42,7 @@ class _InformationState extends State<Information> {
           Container(
             //color: Colors.orange,
             // padding: const EdgeInsets.all(10),
-            height: 200,
+            height: 170,
             width: 350,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(8),
@@ -70,7 +64,7 @@ class _InformationState extends State<Information> {
                   ),
                 ),
                 Container(
-                  height: 120.0,
+                  height: 100.0,
                   padding: const EdgeInsets.all(5),
                   width: double.infinity,
                   child: Consumer<ProviderRTDB>(
@@ -78,13 +72,11 @@ class _InformationState extends State<Information> {
                       return Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('Dispositivo : $dispositivo'),
-                          Text('Local do Dispositivo : $cidade'),
-                          Text('CEP : $cep'),
+                          Text('Dispositivo : ${_dispController.text}'),
                           Text(
-                              'Nome : ${model.datosProvider == null ? 'sem nome' : model.datosProvider!.name}'),
-                          Text(
-                              'e-mail : ${model.datosProvider == null ? 'sem email' : model.datosProvider!.email}'),
+                              'Local do Dispositivo : ${_cidadeController.text}'),
+                          Text('CEP : ${_cepController.text}'),
+                          Text('Nome : ${_nameController.text}'),
                         ],
                       );
                     },
@@ -95,8 +87,8 @@ class _InformationState extends State<Information> {
                     child: InkWell(
                       onLongPress: () => _dispN(context),
                       child: const Text(
-                        'Mantenha apertado para mudar as informação',
-                        style: TextStyle(fontSize: 13.0, color: Colors.amber),
+                        'Apertar para mudar as informação',
+                        style: TextStyle(fontSize: 15.0, color: Colors.amber),
                       ),
                     ),
                   ),
@@ -115,13 +107,10 @@ class _InformationState extends State<Information> {
   Future<void> _obtener() async {
     SharedPreferences preference = await SharedPreferences.getInstance();
     setState(() {
-      dispositivo = preference.getString('disp') ?? 'Sem Dispositivo';
-      cep = preference.getString('cep') ?? 'sem Data';
-      cidade = preference.getString('cidade') ?? 'sem Data';
-
-      _cepController.text = cep;
-      _cidadeController.text = cidade;
-      _numberController.text = dispositivo;
+      _cepController.text = preference.getString('cep') ?? '';
+      _cidadeController.text = preference.getString('cidade') ?? '';
+      _dispController.text = preference.getString('disp') ?? '';
+      _nameController.text = preference.getString('name') ?? '';
     });
   }
 
@@ -130,14 +119,16 @@ class _InformationState extends State<Information> {
 
     setState(
       () {
-        preference.setString('disp', _numberController.text);
+        preference.setString('disp', _dispController.text);
         preference.setString('cep', _cepController.text);
         preference.setString('cidade', _cidadeController.text);
-        database.child('disp' + _numberController.text).update(
+        preference.setString('name', _nameController.text);
+        database.child('disp${_dispController.text}').update(
           {
-            'disp': _numberController.text,
+            'disp': _dispController.text,
             'cidade': _cidadeController.text,
             'cep': _cepController.text,
+            'name': _nameController.text,
           },
         );
       },
@@ -145,6 +136,7 @@ class _InformationState extends State<Information> {
   }
 
   void _dispN(BuildContext context) async {
+    final dataDisp = Provider.of<ProviderRTDB>(context, listen: false);
     return showDialog(
       context: context,
       builder: (context) {
@@ -166,9 +158,10 @@ class _InformationState extends State<Information> {
                     ),
                   );
                   _colocar();
+                  dataDisp.saveDisp();
 
                   Timer.periodic(const Duration(seconds: 2), (timer) {
-                   //  Restart.restartApp();
+                    // Restart.restartApp();
                   });
                 }
               },
@@ -178,64 +171,36 @@ class _InformationState extends State<Information> {
           ],
           title: const Text('Aleterar Informação'),
           content: SizedBox(
-            height: 284,
+            height: 250,
             width: 200,
             child: Form(
               key: _formKey,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  TextFormField(A
-                    decoration: InputDecoration(
-                        contentPadding: const EdgeInsets.symmetric(
-                            vertical: 0, horizontal: 10),
-                        border: const OutlineInputBorder(),
-                        labelText: 'E-mail',
-                        hintText: email,
-                      errorStyle:const  TextStyle(
-                        fontSize: 5
-                      ),
-
+                  TextFormField(
+                    decoration: const InputDecoration(
+                      contentPadding:
+                          EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+                      border: OutlineInputBorder(),
+                      labelText: 'Nome',
                     ),
-                    keyboardType: TextInputType.emailAddress,
-                    controller: _emailController,
+                    keyboardType: TextInputType.name,
+                    controller: _nameController,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return 'Ingrese E-mail';
+                        return 'Ingrese Nome';
                       }
                       return null;
                     },
                   ),
-
-
-
-
-
-
                   TextFormField(
-                    decoration: InputDecoration(
-                        contentPadding: const EdgeInsets.symmetric(
-                            vertical: 0, horizontal: 10),
-                        border: const OutlineInputBorder(),
-                        labelText: 'Senha',
-                        hintText: password),
-                    keyboardType: TextInputType.number,
-                    controller: _passController,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Ingrese Dispositivo';
-                      }
-                      return null;
-                    },
-                  ),
-
-                  TextFormField(
-                    decoration: InputDecoration(
-                        contentPadding: const EdgeInsets.symmetric(
-                            vertical: 0, horizontal: 10),
-                        border: const OutlineInputBorder(),
-                        labelText: 'Local do Dispositivo',
-                        hintText: cidade),
+                    decoration: const InputDecoration(
+                      contentPadding:
+                          EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+                      border: OutlineInputBorder(),
+                      labelText: 'Local do Dispositivo',
+                    ),
                     keyboardType: TextInputType.name,
                     controller: _cidadeController,
                     validator: (value) {
@@ -251,12 +216,12 @@ class _InformationState extends State<Information> {
                       CepInputFormatter(),
                     ],
                     keyboardType: TextInputType.number,
-                    decoration: InputDecoration(
-                        contentPadding: const EdgeInsets.symmetric(
-                            vertical: 0, horizontal: 10),
-                        border: const OutlineInputBorder(),
-                        labelText: 'CEP',
-                        hintText: cep),
+                    decoration: const InputDecoration(
+                      contentPadding:
+                          EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+                      border: OutlineInputBorder(),
+                      labelText: 'CEP',
+                    ),
                     controller: _cepController,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
@@ -266,14 +231,15 @@ class _InformationState extends State<Information> {
                     },
                   ),
                   TextFormField(
-                    decoration: InputDecoration(
-                        contentPadding: const EdgeInsets.symmetric(
-                            vertical: 0, horizontal: 10),
-                        border: const OutlineInputBorder(),
-                        labelText: 'Dispositivo',
-                        hintText: dispositivo),
+                    onChanged: (value) => dataDisp.changueDisp(value),
+                    decoration: const InputDecoration(
+                      contentPadding:
+                          EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+                      border: OutlineInputBorder(),
+                      labelText: 'Dispositivo',
+                    ),
                     keyboardType: TextInputType.number,
-                    controller: _numberController,
+                    controller: _dispController,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'Ingrese Dispositivo';

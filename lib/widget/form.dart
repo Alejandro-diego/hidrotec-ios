@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-
+import 'package:shared_preferences/shared_preferences.dart';
 
 class FormSigIn extends StatefulWidget {
   const FormSigIn(
@@ -20,6 +19,12 @@ class FormSigIn extends StatefulWidget {
 
 class _FormSigInState extends State<FormSigIn> {
   @override
+  void initState() {
+    _obtenerCredenciales();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(
@@ -33,19 +38,17 @@ class _FormSigInState extends State<FormSigIn> {
               keyboardType: TextInputType.emailAddress,
               controller: widget.usercontroller,
               cursorColor: Colors.amberAccent,
-              style: const TextStyle(fontSize: 20),
               decoration: const InputDecoration(
-                hintText: 'Usuario',
                 prefixIcon: Padding(
+                  padding: EdgeInsetsDirectional.only(start: 1),
                   child: Icon(
                     Icons.person_outline,
-                    size: 35,
+                    size: 20,
                     color: Colors.grey,
                   ),
-                  padding: EdgeInsetsDirectional.only(start: 2),
                 ),
                 focusedBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(width: 2, color: Colors.amberAccent),
+                  borderSide: BorderSide(width: 1, color: Colors.amberAccent),
                 ),
               ),
               validator: (value) {
@@ -56,25 +59,22 @@ class _FormSigInState extends State<FormSigIn> {
               },
             ),
             Padding(
-              padding:
-                  const EdgeInsets.symmetric(vertical: 16 * 1.50),
+              padding: const EdgeInsets.symmetric(vertical: 16 * 1.50),
               child: TextFormField(
                 controller: widget.passcontroller,
                 cursorColor: Colors.amberAccent,
-                style: const TextStyle(fontSize: 20),
                 decoration: const InputDecoration(
-                  hintText: 'Senha',
                   prefixIcon: Padding(
+                    padding: EdgeInsetsDirectional.only(start: 1),
                     child: Icon(
                       Icons.lock_outline_rounded,
-                      size: 35,
+                      size: 20,
                       color: Colors.grey,
                     ),
-                    padding: EdgeInsetsDirectional.only(start: 2),
                   ),
                   focusedBorder: UnderlineInputBorder(
                       borderSide:
-                          BorderSide(width: 2, color: Colors.amberAccent)),
+                          BorderSide(width: 1, color: Colors.amberAccent)),
                 ),
                 obscureText: true,
                 validator: (value) {
@@ -90,5 +90,13 @@ class _FormSigInState extends State<FormSigIn> {
         ),
       ),
     );
+  }
+
+  Future<void> _obtenerCredenciales() async {
+    SharedPreferences preference = await SharedPreferences.getInstance();
+    setState(() {
+      widget.passcontroller.text = preference.getString('email') ?? '';
+      widget.usercontroller.text = preference.getString('pass') ?? '';
+    });
   }
 }

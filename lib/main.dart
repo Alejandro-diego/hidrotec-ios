@@ -4,18 +4,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hidrotec/screen/home.dart';
 import 'package:hidrotec/screen/login.dart';
-import 'package:hidrotec/screen/logo.dart';
+import 'package:hidrotec/screen/loginpage.dart';
+import 'package:hidrotec/widget/logo.dart';
 import 'package:provider/provider.dart';
 
 import 'models/providerrtdb.dart';
 
 void main() async {
-  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
-
-
+  WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(MultiProvider(providers: [
-
     ChangeNotifierProvider(
       create: (_) => ProviderRTDB(),
     ),
@@ -31,18 +29,15 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   @override
-
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(      debugShowCheckedModeBanner: false,
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
       theme: ThemeData.dark(),
       title: 'Hidrotec',
-      home:  const MainPage(),
-
-
+      home: const MainPage(),
     );
   }
-
 }
 
 class MainPage extends StatelessWidget {
@@ -65,15 +60,9 @@ class MainPage extends StatelessWidget {
           } else if (snapshot.hasData) {
             return const HomePage();
           }
-          return const LoginPage();
+          return const LoginPage1();
         },
       ),
     );
   }
-
-
 }
-
-
-
-

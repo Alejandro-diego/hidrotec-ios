@@ -38,35 +38,34 @@ class _WeatherState extends State<Weather> {
       child: FutureBuilder<DataWt>(
           future: futureData,
           builder: (context, snapshot) {
-
-             if (snapshot.hasData){
-            return Column(
-              children: [
-                const Text(
-                  'Temperatura ambiente',
-                  style: TextStyle(fontSize: 9),
-                ),
-                Text(
-                  snapshot.hasData
-                      ? snapshot.data!.temp.toString() + '°'
-                      : 'S/D',
-                  style: const TextStyle(fontSize: 20),
-                ),
-
-              
-                Container(
-                  width: 40,
-                  height: 40,
-                  decoration: BoxDecoration(
-                    
-                    image: DecorationImage(
-                      image: NetworkImage("http://openweathermap.org/img/w/${snapshot.data!.icon}.png",scale: 1),
-                    ),
+            if (snapshot.hasData) {
+              return Column(
+                children: [
+                  const Text(
+                    'Temperatura ambiente',
+                    style: TextStyle(fontSize: 9),
                   ),
-                )
-              ],
-            );
-          } else { return const Center(child: CircularProgressIndicator());} } ),
+                  Text(
+                    snapshot.hasData ? '${snapshot.data!.temp}°' : 'S/D',
+                    style: const TextStyle(fontSize: 20),
+                  ),
+                  Container(
+                    width: 40,
+                    height: 40,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: NetworkImage(
+                            "http://openweathermap.org/img/w/${snapshot.data!.icon}.png",
+                            scale: 1),
+                      ),
+                    ),
+                  )
+                ],
+              );
+            } else {
+              return const Center(child: CircularProgressIndicator());
+            }
+          }),
     );
   }
 
@@ -76,7 +75,7 @@ class _WeatherState extends State<Weather> {
     zipCode = preference.getString('cep') ?? 'sem Data';
 
     zipCode = zipCode.replaceAll('.', '');
-    
+
     final response = await http.get(Uri.parse(
         'http://api.openweathermap.org/data/2.5/weather?zip=$zipCode,br&APPID=f3a6f2a2ee5dffc5949de6573c73f232&units=metric'));
 

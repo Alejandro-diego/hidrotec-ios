@@ -45,6 +45,8 @@ dependencies:
   http: ^0.13.4
   brasil_fields: ^1.4.4
   firebase_auth: ^3.3.19
+  google_fonts: ^3.0.1
+  restart_app: ^1.1.0+1
 
 
 
