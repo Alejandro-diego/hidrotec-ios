@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>338880342895-lvtjgsmm7hrv9h3707ksvkj58hn0fkto.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.338880342895-lvtjgsmm7hrv9h3707ksvkj58hn0fkto</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>338880342895-17ugtj8v64f2j6e63pnssv8vgbpattnh.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDDjdih5gsoSAIdTYFfH3LfIasvMGUK9X4</string>
+	<key>GCM_SENDER_ID</key>
+	<string>338880342895</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.oitech.hidrotec</string>
+	<key>PROJECT_ID</key>
+	<string>hidrotec-bae15</string>
+	<key>STORAGE_BUCKET</key>
+	<string>hidrotec-bae15.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:338880342895:ios:1173cc29cbb0edb89bd69a</string>
+	<key>DATABASE_URL</key>
+	<string>https://hidrotec-bae15-default-rtdb.firebaseio.com</string>
+</dict>
+</plist>
