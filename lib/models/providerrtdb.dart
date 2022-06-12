@@ -10,22 +10,15 @@ class ProviderRTDB extends ChangeNotifier {
   DatosAD? _datosProvider;
   final _db = FirebaseDatabase.instance.ref();
   String _dispositivo = '';
-  String _disp = "";
 
   late StreamSubscription<DatabaseEvent> _diaStream;
 
   DatosAD? get datosProvider => _datosProvider;
 
   changueDisp(String value) {
-    _disp = value;
+    _dispositivo = value;
     notifyListeners();
-  }
-
-  void saveDisp() {
-    datosProvider!.disp = _disp;
-    if (kDebugMode) {
-      print(datosProvider!.disp);
-    }
+    _escuchar();
   }
 
   ProviderRTDB() {
@@ -39,6 +32,10 @@ class ProviderRTDB extends ChangeNotifier {
       _datosProvider = DatosAD.fromRTDB(data);
       notifyListeners();
     });
+
+    if (kDebugMode) {
+      print("${_dispositivo}lo que llega");
+    }
   }
 
   @override
@@ -69,7 +66,13 @@ class ProviderRTDB extends ChangeNotifier {
     SharedPreferences preference = await SharedPreferences.getInstance();
 
     // disp = preference.get('disp') ?? '01';
-    _dispositivo = preference.getString('disp') ?? '01';
-    _escuchar();
+    _dispositivo = preference.getString('disp') ?? '';
+    if (_dispositivo != "") {
+      _escuchar();
+    }
+
+    if (kDebugMode) {
+      print("$_dispositivo  preferece");
+    }
   }
 }

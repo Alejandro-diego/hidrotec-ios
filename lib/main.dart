@@ -3,11 +3,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hidrotec/screen/home.dart';
-import 'package:hidrotec/screen/login.dart';
 import 'package:hidrotec/screen/loginpage.dart';
-import 'package:hidrotec/widget/logo.dart';
 import 'package:provider/provider.dart';
-
 import 'models/providerrtdb.dart';
 
 void main() async {

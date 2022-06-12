@@ -38,7 +38,6 @@ class _PickColorState extends State<PickColor> {
           children: [
             const Text('Led Control'),
             CircleColorPicker(
-              
               controller: _controller,
               onChanged: (color) {
                 setState(() {
@@ -48,7 +47,7 @@ class _PickColorState extends State<PickColor> {
                   _col = _col.replaceAll(')', '');
 
                   _database
-                      .child('disp' + dispositivo.datosProvider!.disp)
+                      .child('disp${dispositivo.datosProvider!.disp}')
                       .update({
                     'color': _col,
                   });

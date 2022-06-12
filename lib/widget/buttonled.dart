@@ -3,7 +3,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-
 import '../models/providerrtdb.dart';
 
 class LedButton extends StatefulWidget {
@@ -17,8 +16,6 @@ class _LedButtonState extends State<LedButton> {
   final _database = FirebaseDatabase.instance.ref();
   @override
   Widget build(BuildContext context) {
-    
-
     return Consumer<ProviderRTDB>(builder: (context, model, child) {
       if (model.datosProvider != null) {
         return Container(
@@ -44,7 +41,7 @@ class _LedButtonState extends State<LedButton> {
                     onChanged: (bool v1) {
                       setState(() {
                         _database
-                            .child('disp' + model.datosProvider!.disp)
+                            .child('disp${model.datosProvider!.disp}')
                             .update({
                           'led': v1,
                           'ledpisca': false,
@@ -64,7 +61,7 @@ class _LedButtonState extends State<LedButton> {
                     setState(
                       () {
                         _database
-                            .child('disp' + model.datosProvider!.disp)
+                            .child('disp${model.datosProvider!.disp}')
                             .update(
                           {
                             'ledpisca': v2,

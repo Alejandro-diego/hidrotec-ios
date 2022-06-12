@@ -1,15 +1,10 @@
-
-
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hidrotec/models/providerrtdb.dart';
 import 'package:provider/provider.dart';
 
-
 import 'package:segment_display/segment_display.dart';
-
-
 
 class SetTempContainer extends StatefulWidget {
   const SetTempContainer({Key? key}) : super(key: key);
@@ -96,7 +91,7 @@ class _SetTempContainerState extends State<SetTempContainer> {
                     onChanged: (bool v1) {
                       setState(() {
                         _database
-                            .child('disp' + model.datosProvider!.disp)
+                            .child('disp${model.datosProvider!.disp}')
                             .update({
                           'bomba': v1,
                           'auto': false,
@@ -112,7 +107,7 @@ class _SetTempContainerState extends State<SetTempContainer> {
                     onChanged: (bool v2) {
                       setState(() {
                         _database
-                            .child('disp' + model.datosProvider!.disp)
+                            .child('disp${model.datosProvider!.disp}')
                             .update({
                           'bomba': false,
                           'auto': v2,

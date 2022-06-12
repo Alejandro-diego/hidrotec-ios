@@ -17,7 +17,9 @@ class _GaugeState extends State<Gauge> {
     return Consumer<ProviderRTDB>(builder: (context, model, child) {
       if (model.datosProvider != null) {
         return SfRadialGauge(
-            title: const GaugeTitle(text: 'Control Temperatura',textStyle: TextStyle(fontSize: 10)),
+            title: const GaugeTitle(
+                text: 'Control Temperatura',
+                textStyle: TextStyle(fontSize: 10)),
             axes: <RadialAxis>[
               RadialAxis(
                   minimum: 0,
@@ -45,7 +47,6 @@ class _GaugeState extends State<Gauge> {
                       color: Colors.redAccent,
                       width: 4,
                     ),
-
                     MarkerPointer(
                       markerOffset: -11,
                       color: Colors.orangeAccent,
@@ -54,14 +55,13 @@ class _GaugeState extends State<Gauge> {
                       enableDragging: true,
                       value: model.datosProvider!.tempSetting.toDouble(),
                     ),
-                   
                   ],
                   annotations: <GaugeAnnotation>[
                     GaugeAnnotation(
                         widget: Row(
                           children: <Widget>[
                             Text(
-                              (model.datosProvider!.temp /100).toString() + "º",
+                              "${model.datosProvider!.temp / 100}º",
                               style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 20,

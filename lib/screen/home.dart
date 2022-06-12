@@ -10,7 +10,6 @@ import '../widget/buttonled.dart';
 import '../widget/circulo.dart';
 import '../widget/weather.dart';
 
-
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
@@ -23,32 +22,25 @@ class _HomePageState extends State<HomePage> {
 
   String disp = '463';
 
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: PreferredSize(
-        preferredSize:const  Size(double.infinity,56.0),
+        preferredSize: const Size(double.infinity, 56.0),
         child: ClipRRect(
           child: BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: 5,sigmaY: 5),
+            filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
             child: AppBar(
-              backgroundColor:Colors.transparent,
+              backgroundColor: Colors.transparent,
               elevation: 0,
-              
               title: const Text('Hidrotec Controller'),
               actions: <Widget>[
                 IconButton(
-                    icon: const Icon(Icons.headset_mic),
-                    onPressed: () {
-
-                    }),
+                    icon: const Icon(Icons.headset_mic), onPressed: () {}),
                 IconButton(
                     onPressed: () {
                       FirebaseAuth.instance.signOut();
-
                     },
                     icon: const Icon(Icons.logout)),
               ],
@@ -73,8 +65,8 @@ class _HomePageState extends State<HomePage> {
                   Container(
                     height: 310,
                     width: MediaQuery.of(context).size.width,
-                    margin:
-                        const EdgeInsets.only (top: 85,left: 5,right: 5,bottom: 10),
+                    margin: const EdgeInsets.only(
+                        top: 85, left: 5, right: 5, bottom: 10),
                     padding: const EdgeInsets.all(5.0),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(8),
@@ -145,14 +137,12 @@ class _HomePageState extends State<HomePage> {
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 crossAxisAlignment: CrossAxisAlignment.center,
-                children:  [
-                const   PickColor(),
-
-
+                children: [
+                  const PickColor(),
                   Column(
-                    children:const  [
-                       LedButton(),
-                       Weather(),
+                    children: const [
+                      LedButton(),
+                      Weather(),
                     ],
                   ),
                 ],

@@ -111,6 +111,9 @@ class _InformationState extends State<Information> {
       _cidadeController.text = preference.getString('cidade') ?? '';
       _dispController.text = preference.getString('disp') ?? '';
       _nameController.text = preference.getString('name') ?? '';
+      if (_dispController.text != "") {
+        context.read<ProviderRTDB>().changueDisp(_dispController.text);
+      }
     });
   }
 
@@ -136,7 +139,6 @@ class _InformationState extends State<Information> {
   }
 
   void _dispN(BuildContext context) async {
-    final dataDisp = Provider.of<ProviderRTDB>(context, listen: false);
     return showDialog(
       context: context,
       builder: (context) {
@@ -158,7 +160,9 @@ class _InformationState extends State<Information> {
                     ),
                   );
                   _colocar();
-                  dataDisp.saveDisp();
+                  context
+                      .read<ProviderRTDB>()
+                      .changueDisp(_dispController.text);
 
                   Timer.periodic(const Duration(seconds: 2), (timer) {
                     // Restart.restartApp();
@@ -231,7 +235,6 @@ class _InformationState extends State<Information> {
                     },
                   ),
                   TextFormField(
-                    onChanged: (value) => dataDisp.changueDisp(value),
                     decoration: const InputDecoration(
                       contentPadding:
                           EdgeInsets.symmetric(vertical: 0, horizontal: 10),
