@@ -2,8 +2,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:hidrotec/screen/home.dart';
-import 'package:hidrotec/screen/loginpage.dart';
+import 'package:hidrotec/screen/home/home.dart';
+
+import 'package:hidrotec/screen/login/loginpage.dart';
 import 'package:provider/provider.dart';
 import 'models/providerrtdb.dart';
 
@@ -57,7 +58,7 @@ class MainPage extends StatelessWidget {
           } else if (snapshot.hasData) {
             return const HomePage();
           }
-          return const LoginPage1();
+          return const LoginPage();
         },
       ),
     );

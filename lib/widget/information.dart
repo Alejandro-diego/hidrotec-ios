@@ -43,7 +43,7 @@ class _InformationState extends State<Information> {
             //color: Colors.orange,
             // padding: const EdgeInsets.all(10),
             height: 170,
-            width: 350,
+            width: 300,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(8),
               color: Colors.black.withOpacity(.2),
@@ -142,115 +142,117 @@ class _InformationState extends State<Information> {
     return showDialog(
       context: context,
       builder: (context) {
-        return AlertDialog(
-          backgroundColor: Colors.black.withOpacity(.5),
-          actions: <Widget>[
-            ElevatedButton.icon(
-              onPressed: () {
-                if (_formKey.currentState!.validate()) {
-                  Navigator.of(context).pop();
+        return SingleChildScrollView(
+          child: AlertDialog(
+            backgroundColor: Colors.black.withOpacity(.5),
+            actions: <Widget>[
+              ElevatedButton.icon(
+                onPressed: () {
+                  if (_formKey.currentState!.validate()) {
+                    Navigator.of(context).pop();
 
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      backgroundColor: Colors.black,
-                      content: Text(
-                        'Salvando datos',
-                        style: TextStyle(color: Colors.white70),
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        backgroundColor: Colors.black,
+                        content: Text(
+                          'Salvando datos',
+                          style: TextStyle(color: Colors.white70),
+                        ),
                       ),
-                    ),
-                  );
-                  _colocar();
-                  context
-                      .read<ProviderRTDB>()
-                      .changueDisp(_dispController.text);
+                    );
+                    _colocar();
+                    context
+                        .read<ProviderRTDB>()
+                        .changueDisp(_dispController.text);
 
-                  Timer.periodic(const Duration(seconds: 2), (timer) {
-                    // Restart.restartApp();
-                  });
-                }
-              },
-              icon: const Icon(Icons.save),
-              label: const Text('Guardar'),
-            ),
-          ],
-          title: const Text('Aleterar Informação'),
-          content: SizedBox(
-            height: 250,
-            width: 200,
-            child: Form(
-              key: _formKey,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  TextFormField(
-                    decoration: const InputDecoration(
-                      contentPadding:
-                          EdgeInsets.symmetric(vertical: 0, horizontal: 10),
-                      border: OutlineInputBorder(),
-                      labelText: 'Nome',
+                    Timer.periodic(const Duration(seconds: 2), (timer) {
+                      // Restart.restartApp();
+                    });
+                  }
+                },
+                icon: const Icon(Icons.save),
+                label: const Text('Guardar'),
+              ),
+            ],
+            title: const Text('Aleterar Informação'),
+            content: SizedBox(
+              height: 250,
+              width: 200,
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    TextFormField(
+                      decoration: const InputDecoration(
+                        contentPadding:
+                            EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+                        border: OutlineInputBorder(),
+                        labelText: 'Nome',
+                      ),
+                      keyboardType: TextInputType.name,
+                      controller: _nameController,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Ingrese Nome';
+                        }
+                        return null;
+                      },
                     ),
-                    keyboardType: TextInputType.name,
-                    controller: _nameController,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Ingrese Nome';
-                      }
-                      return null;
-                    },
-                  ),
-                  TextFormField(
-                    decoration: const InputDecoration(
-                      contentPadding:
-                          EdgeInsets.symmetric(vertical: 0, horizontal: 10),
-                      border: OutlineInputBorder(),
-                      labelText: 'Local do Dispositivo',
+                    TextFormField(
+                      decoration: const InputDecoration(
+                        contentPadding:
+                            EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+                        border: OutlineInputBorder(),
+                        labelText: 'Local do Dispositivo',
+                      ),
+                      keyboardType: TextInputType.name,
+                      controller: _cidadeController,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Ingrese Local do Dispositivo';
+                        }
+                        return null;
+                      },
                     ),
-                    keyboardType: TextInputType.name,
-                    controller: _cidadeController,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Ingrese Local do Dispositivo';
-                      }
-                      return null;
-                    },
-                  ),
-                  TextFormField(
-                    inputFormatters: [
-                      FilteringTextInputFormatter.digitsOnly,
-                      CepInputFormatter(),
-                    ],
-                    keyboardType: TextInputType.number,
-                    decoration: const InputDecoration(
-                      contentPadding:
-                          EdgeInsets.symmetric(vertical: 0, horizontal: 10),
-                      border: OutlineInputBorder(),
-                      labelText: 'CEP',
+                    TextFormField(
+                      inputFormatters: [
+                        FilteringTextInputFormatter.digitsOnly,
+                        CepInputFormatter(),
+                      ],
+                      keyboardType: TextInputType.number,
+                      decoration: const InputDecoration(
+                        contentPadding:
+                            EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+                        border: OutlineInputBorder(),
+                        labelText: 'CEP',
+                      ),
+                      controller: _cepController,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'por favor ingresar Preço';
+                        }
+                        return null;
+                      },
                     ),
-                    controller: _cepController,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'por favor ingresar Preço';
-                      }
-                      return null;
-                    },
-                  ),
-                  TextFormField(
-                    decoration: const InputDecoration(
-                      contentPadding:
-                          EdgeInsets.symmetric(vertical: 0, horizontal: 10),
-                      border: OutlineInputBorder(),
-                      labelText: 'Dispositivo',
+                    TextFormField(
+                      decoration: const InputDecoration(
+                        contentPadding:
+                            EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+                        border: OutlineInputBorder(),
+                        labelText: 'Dispositivo',
+                      ),
+                      keyboardType: TextInputType.number,
+                      controller: _dispController,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Ingrese Dispositivo';
+                        }
+                        return null;
+                      },
                     ),
-                    keyboardType: TextInputType.number,
-                    controller: _dispController,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Ingrese Dispositivo';
-                      }
-                      return null;
-                    },
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),

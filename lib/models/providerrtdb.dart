@@ -32,10 +32,6 @@ class ProviderRTDB extends ChangeNotifier {
       _datosProvider = DatosAD.fromRTDB(data);
       notifyListeners();
     });
-
-    if (kDebugMode) {
-      print("${_dispositivo}lo que llega");
-    }
   }
 
   @override
@@ -69,10 +65,6 @@ class ProviderRTDB extends ChangeNotifier {
     _dispositivo = preference.getString('disp') ?? '';
     if (_dispositivo != "") {
       _escuchar();
-    }
-
-    if (kDebugMode) {
-      print("$_dispositivo  preferece");
     }
   }
 }
