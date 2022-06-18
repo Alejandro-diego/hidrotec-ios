@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../responsive.dart';
-import 'login-tablet.dart';
+import 'login_tablet.dart';
 import 'login_movil.dart';
 
 class LoginPage extends StatelessWidget {

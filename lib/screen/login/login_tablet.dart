@@ -60,7 +60,7 @@ class _TabletLoginScrennState extends State<TabletLoginScrenn> {
           Positioned(
             width: size.width * 0.7,
             height: size.height,
-            left: size.width * 0.33,
+            left: size.width * 0.34,
             bottom: size.height * -0.1,
             child: FormSigIn(
               keyvalidator: _formKey,
