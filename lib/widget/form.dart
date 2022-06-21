@@ -43,8 +43,8 @@ class _FormSigInState extends State<FormSigIn> {
                   padding: EdgeInsetsDirectional.only(start: 1),
                   child: Icon(
                     Icons.person_outline,
-                    size: 20,
-                    color: Colors.grey,
+                    size: 25,
+                    color: Colors.black,
                   ),
                 ),
                 focusedBorder: UnderlineInputBorder(
@@ -68,8 +68,8 @@ class _FormSigInState extends State<FormSigIn> {
                     padding: EdgeInsetsDirectional.only(start: 1),
                     child: Icon(
                       Icons.lock_outline_rounded,
-                      size: 20,
-                      color: Colors.grey,
+                      size: 25,
+                      color: Colors.black,
                     ),
                   ),
                   focusedBorder: UnderlineInputBorder(

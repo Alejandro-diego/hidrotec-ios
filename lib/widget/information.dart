@@ -46,7 +46,7 @@ class _InformationState extends State<Information> {
             width: 300,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(8),
-              color: Colors.black.withOpacity(.2),
+              color: Colors.black.withOpacity(.6),
               border: Border.all(),
             ),
             child: Column(

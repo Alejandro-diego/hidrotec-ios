@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hidrotec/widget/form.dart';
 import 'package:hidrotec/widget/information.dart';
+import 'package:hidrotec/widget/iotech_logo_small.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../widget/logo.dart';
@@ -45,7 +46,7 @@ class _TabletLoginScrennState extends State<TabletLoginScrenn> {
               width: size.width * 0.88,
               height: size.height,
               left: size.width * 0.05,
-              bottom: size.height * -0.02,
+              bottom: size.height * -0.05,
               child: LogoHidrotec1(
                 fontSize1: 35,
                 fontSize2: 10,
@@ -107,31 +108,7 @@ class _TabletLoginScrennState extends State<TabletLoginScrenn> {
           Positioned(
             right: size.width * 0.05,
             top: size.height * 0.93,
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                Text(
-                  'Power By',
-                  style: GoogleFonts.cedarvilleCursive(
-                    textStyle: const TextStyle(fontSize: 10),
-                  ),
-                ),
-                Text(
-                  'IOT',
-                  style: GoogleFonts.roboto(
-                    fontWeight: FontWeight.w500,
-                    textStyle: const TextStyle(color: Colors.red, fontSize: 20),
-                  ),
-                ),
-                Text(
-                  'ech',
-                  style: GoogleFonts.roboto(
-                    textStyle:
-                        const TextStyle(color: Colors.white, fontSize: 20),
-                  ),
-                ),
-              ],
-            ),
+            child: const IotechLogo(),
           ),
         ],
       ),

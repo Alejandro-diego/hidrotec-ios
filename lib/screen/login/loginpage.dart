@@ -9,10 +9,20 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Responsive(
-        mobile: MobileLoginScrenn(),
-        tablet: TabletLoginScrenn(),
+    return Scaffold(
+      body: Container(
+        width: MediaQuery.of(context).size.width,
+        height: double.infinity,
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage("lib/image/pool.jpg"),
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: const Responsive(
+          mobile: MobileLoginScrenn(),
+          tablet: TabletLoginScrenn(),
+        ),
       ),
     );
   }
