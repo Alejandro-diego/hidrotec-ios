@@ -11,11 +11,16 @@ import 'models/providerrtdb.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(MultiProvider(providers: [
-    ChangeNotifierProvider(
-      create: (_) => ProviderRTDB(),
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (_) => ProviderRTDB(),
+        ),
+      ],
+      child: const MyApp(),
     ),
-  ], child: const MyApp()));
+  );
 }
 
 class MyApp extends StatefulWidget {

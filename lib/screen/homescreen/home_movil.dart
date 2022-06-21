@@ -38,6 +38,7 @@ class _HomePageMovilState extends State<HomePageMovil> {
                     color: Colors.grey[800]!.withOpacity(0.6),
                   ),
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       SetTempContainer(
                         width: size.width * .35,

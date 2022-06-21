@@ -9,7 +9,9 @@ class IotechLogo extends StatelessWidget {
     return Container(
       width: 120,
       padding: const EdgeInsets.all(2),
-      decoration: BoxDecoration(color: Colors.black.withOpacity(.6)),
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(8),
+          color: Colors.black.withOpacity(.6)),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [

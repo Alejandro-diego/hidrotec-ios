@@ -31,13 +31,14 @@ class _HomePageTabletState extends State<HomePageTablet> {
                   height: 312,
                   width: MediaQuery.of(context).size.width,
                   margin: const EdgeInsets.only(
-                      top: 53, left: 5, right: 5, bottom: 10),
+                      top: 54, left: 5, right: 5, bottom: 10),
                   padding: const EdgeInsets.all(8.0),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8),
                     color: Colors.grey[800]!.withOpacity(0.6),
                   ),
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       SetTempContainer(
                         width: size.width * .17,
