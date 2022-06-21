@@ -2,7 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:hidrotec/widget/form.dart';
 import 'package:hidrotec/widget/information.dart';
 import 'package:hidrotec/widget/iotech_logo_small.dart';
@@ -28,6 +27,12 @@ class _TabletLoginScrennState extends State<TabletLoginScrenn> {
   final _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
   final _passController = TextEditingController();
+
+  @override
+  void initState() {
+    _obtener();
+    super.initState();
+  }
 
   @override
   void dispose() {
@@ -78,15 +83,6 @@ class _TabletLoginScrennState extends State<TabletLoginScrenn> {
               child: ElevatedButton(
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        backgroundColor: Colors.black,
-                        content: Text(
-                          'Firebase Go',
-                          style: TextStyle(color: Colors.white),
-                        ),
-                      ),
-                    );
                     sigIN();
                     _colocarCredenciales();
                   }
@@ -122,6 +118,16 @@ class _TabletLoginScrennState extends State<TabletLoginScrenn> {
         password: _passController.text.trim(),
       );
     } on FirebaseAuthException catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          backgroundColor: Colors.black,
+          content: Text(
+            e.code,
+            style: const TextStyle(color: Colors.white),
+          ),
+        ),
+      );
+
       if (e.code == 'user-not-found') {
         if (kDebugMode) {
           print('No user found for that email.');
@@ -143,5 +149,13 @@ class _TabletLoginScrennState extends State<TabletLoginScrenn> {
         preference.setString('password', _passController.text);
       },
     );
+  }
+
+  Future<void> _obtener() async {
+    SharedPreferences preference = await SharedPreferences.getInstance();
+    setState(() {
+      _emailController.text = preference.getString('email') ?? '';
+      _passController.text = preference.getString('password') ?? '';
+    });
   }
 }

@@ -38,16 +38,18 @@ class _FormSigInState extends State<FormSigIn> {
               keyboardType: TextInputType.emailAddress,
               controller: widget.usercontroller,
               cursorColor: Colors.amberAccent,
-              decoration: const InputDecoration(
-                prefixIcon: Padding(
+              decoration: InputDecoration(
+                filled: true,
+                fillColor: Colors.black.withOpacity(.5),
+                prefixIcon: const Padding(
                   padding: EdgeInsetsDirectional.only(start: 1),
                   child: Icon(
                     Icons.person_outline,
                     size: 25,
-                    color: Colors.black,
+                    color: Colors.grey,
                   ),
                 ),
-                focusedBorder: UnderlineInputBorder(
+                focusedBorder: const UnderlineInputBorder(
                   borderSide: BorderSide(width: 1, color: Colors.amberAccent),
                 ),
               ),
@@ -63,16 +65,18 @@ class _FormSigInState extends State<FormSigIn> {
               child: TextFormField(
                 controller: widget.passcontroller,
                 cursorColor: Colors.amberAccent,
-                decoration: const InputDecoration(
-                  prefixIcon: Padding(
+                decoration: InputDecoration(
+                  filled: true,
+                  fillColor: Colors.black.withOpacity(.5),
+                  prefixIcon: const Padding(
                     padding: EdgeInsetsDirectional.only(start: 1),
                     child: Icon(
                       Icons.lock_outline_rounded,
                       size: 25,
-                      color: Colors.black,
+                      color: Colors.grey,
                     ),
                   ),
-                  focusedBorder: UnderlineInputBorder(
+                  focusedBorder: const UnderlineInputBorder(
                       borderSide:
                           BorderSide(width: 1, color: Colors.amberAccent)),
                 ),
@@ -95,8 +99,8 @@ class _FormSigInState extends State<FormSigIn> {
   Future<void> _obtenerCredenciales() async {
     SharedPreferences preference = await SharedPreferences.getInstance();
     setState(() {
-      widget.passcontroller.text = preference.getString('email') ?? '';
-      widget.usercontroller.text = preference.getString('pass') ?? '';
+      widget.passcontroller.text = preference.getString('password') ?? '';
+      widget.usercontroller.text = preference.getString('emai') ?? '';
     });
   }
 }

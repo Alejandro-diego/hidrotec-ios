@@ -2,11 +2,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:hidrotec/widget/form.dart';
 import 'package:hidrotec/widget/information.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import '../../widget/iotech_logo_small.dart';
 import '../../widget/logo.dart';
 
@@ -46,10 +44,10 @@ class _MobileLoginScrennState extends State<MobileLoginScrenn> {
               width: size.width * 0.88,
               height: size.height,
               left: size.width * 0.05,
-              bottom: size.height * -0.13,
+              bottom: size.height * -0.15,
               child: LogoHidrotec1(
-                fontSize1: 35,
-                fontSize2: 10,
+                fontSize1: 38,
+                fontSize2: 11,
               )),
           Positioned(
             width: size.width * 0.90,
@@ -78,15 +76,6 @@ class _MobileLoginScrennState extends State<MobileLoginScrenn> {
               child: ElevatedButton(
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        backgroundColor: Colors.black,
-                        content: Text(
-                          'Firebase Go',
-                          style: TextStyle(color: Colors.white),
-                        ),
-                      ),
-                    );
                     sigIN();
                     _colocarCredenciales();
                   }
@@ -115,6 +104,7 @@ class _MobileLoginScrennState extends State<MobileLoginScrenn> {
   }
 
   Future sigIN() async {
+    late String error = "erro";
     try {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: _emailController.text.trim(),
@@ -122,14 +112,26 @@ class _MobileLoginScrennState extends State<MobileLoginScrenn> {
       );
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
+        error = "E-mail não registrado";
         if (kDebugMode) {
           print('No user found for that email.');
         }
       } else if (e.code == 'wrong-password') {
+        error = "Senha invalida";
         if (kDebugMode) {
           print('Wrong password provided for that user.');
         }
       }
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          backgroundColor: Colors.black,
+          content: Text(
+            error,
+            style: const TextStyle(color: Colors.white),
+          ),
+        ),
+      );
     }
   }
 
