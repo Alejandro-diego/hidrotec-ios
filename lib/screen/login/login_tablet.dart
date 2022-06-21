@@ -46,7 +46,7 @@ class _TabletLoginScrennState extends State<TabletLoginScrenn> {
               height: size.height,
               left: size.width * 0.05,
               bottom: size.height * -0.02,
-              child: LogoHidrotec(
+              child: LogoHidrotec1(
                 fontSize1: 35,
                 fontSize2: 10,
               )),

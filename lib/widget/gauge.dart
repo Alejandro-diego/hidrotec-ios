@@ -14,14 +14,25 @@ class Gauge extends StatefulWidget {
 class _GaugeState extends State<Gauge> {
   @override
   Widget build(BuildContext context) {
-    return Consumer<ProviderRTDB>(builder: (context, model, child) {
-      if (model.datosProvider != null) {
-        return SfRadialGauge(
-            title: const GaugeTitle(
+    return Consumer<ProviderRTDB>(
+      builder: (context, model, child) {
+        if (model.datosProvider != null) {
+          return Container(
+            // margin: const EdgeInsets.only(top: 2, left: 8),
+            decoration: BoxDecoration(
+              color: Colors.indigo.withOpacity(0.7),
+              borderRadius: BorderRadius.circular(8),
+              border: Border.all(color: Colors.black),
+            ),
+            height: 190.0,
+            width: 200.0,
+            child: SfRadialGauge(
+              title: const GaugeTitle(
                 text: 'Control Temperatura',
-                textStyle: TextStyle(fontSize: 10)),
-            axes: <RadialAxis>[
-              RadialAxis(
+                textStyle: TextStyle(fontSize: 10),
+              ),
+              axes: <RadialAxis>[
+                RadialAxis(
                   minimum: 0,
                   maximum: 60,
                   ranges: <GaugeRange>[
@@ -71,13 +82,17 @@ class _GaugeState extends State<Gauge> {
                         ),
                         angle: 1,
                         positionFactor: .95)
-                  ])
-            ]);
-      } else {
-        return const Center(
-          child: CircularProgressIndicator(),
-        );
-      }
-    });
+                  ],
+                )
+              ],
+            ),
+          );
+        } else {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+      },
+    );
   }
 }

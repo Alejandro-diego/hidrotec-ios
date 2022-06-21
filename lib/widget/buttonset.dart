@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../models/providerrtdb.dart';
 
+// ignore: must_be_immutable
 class ButtonSET extends StatefulWidget {
-  const ButtonSET({Key? key}) : super(key: key);
+  const ButtonSET({
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<ButtonSET> createState() => _ButtonSETState();
@@ -14,8 +17,8 @@ class _ButtonSETState extends State<ButtonSET> {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-      width: MediaQuery.of(context).size.width / 2,
-      height: 65,
+      width: 200,
+      height: 60,
       decoration: BoxDecoration(
           color: Colors.indigo.withOpacity(0.7),
           borderRadius: BorderRadius.circular(8),

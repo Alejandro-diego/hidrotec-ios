@@ -46,7 +46,7 @@ class _MobileLoginScrennState extends State<MobileLoginScrenn> {
               height: size.height,
               left: size.width * 0.05,
               bottom: size.height * -0.09,
-              child: LogoHidrotec(
+              child: LogoHidrotec1(
                 fontSize1: 35,
                 fontSize2: 10,
               )),
