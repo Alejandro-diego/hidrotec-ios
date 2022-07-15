@@ -41,26 +41,30 @@ class _PickColorState extends State<PickColor> {
         child: Column(
           children: [
             const Text('Led Control'),
-            CircleColorPicker(
-              controller: _controller,
-              onChanged: (color) {
-                setState(() {
-                  currentColor = color;
-                  _col = color.toString();
-                  _col = _col.replaceFirst('Color(0xff', '');
-                  _col = _col.replaceAll(')', '');
+            SizedBox(
+              width: 220,
+              height: 200,
+              child: CircleColorPicker(
+                controller: _controller,
+                onChanged: (color) {
+                  setState(() {
+                    currentColor = color;
+                    _col = color.toString();
+                    _col = _col.replaceFirst('Color(0xff', '');
+                    _col = _col.replaceAll(')', '');
 
-                  _database
-                      .child('disp${dispositivo.datosProvider!.disp}')
-                      .update({
-                    'color': _col,
+                    _database
+                        .child('disp${dispositivo.datosProvider!.disp}')
+                        .update({
+                      'color': _col,
+                    });
                   });
-                });
-              },
-              size: Size(widget.height - 25, widget.height - 30),
-              textStyle: const TextStyle(fontSize: 0.0),
-              strokeWidth: 2,
-              thumbSize: 20,
+                },
+                size: const Size(220, 190),
+                textStyle: const TextStyle(fontSize: 0.0),
+                strokeWidth: 2,
+                thumbSize: 15,
+              ),
             ),
           ],
         ),

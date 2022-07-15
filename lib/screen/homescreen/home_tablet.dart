@@ -38,7 +38,7 @@ class _HomePageTabletState extends State<HomePageTablet> {
                     color: Colors.grey[800]!.withOpacity(0.6),
                   ),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       SetTempContainer(
                         width: size.width * .17,
