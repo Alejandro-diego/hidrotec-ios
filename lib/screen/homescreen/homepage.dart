@@ -3,8 +3,10 @@ import 'dart:ui';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../../responsive.dart';
+import '../../widget/small_logo.dart';
 import 'home_movil.dart';
 import 'home_tablet.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -30,13 +32,29 @@ class _HomePageState extends State<HomePage> {
               elevation: 0,
               title: const Text('Hidrotec Controller'),
               actions: <Widget>[
-                IconButton(
-                    icon: const Icon(Icons.headset_mic), onPressed: () {}),
-                IconButton(
-                    onPressed: () {
-                      FirebaseAuth.instance.signOut();
-                    },
-                    icon: const Icon(Icons.logout)),
+                PopupMenuButton<int>(
+                  onSelected: (item) => onSelected(context, item),
+                  itemBuilder: (context) => [
+                    const PopupMenuItem(
+                      value: 0,
+                      child: Icon(
+                        Icons.support_agent,
+                      ),
+                    ),
+                    const PopupMenuItem(
+                      value: 1,
+                      child: Icon(
+                        Icons.info_outline,
+                      ),
+                    ),
+                    const PopupMenuItem(
+                      value: 2,
+                      child: Icon(
+                        Icons.logout,
+                      ),
+                    ),
+                  ],
+                ),
               ],
             ),
           ),
@@ -56,6 +74,57 @@ class _HomePageState extends State<HomePage> {
           tablet: HomePageTablet(),
         ),
       ),
+    );
+  }
+
+  void onSelected(BuildContext context, int item) async {
+    switch (item) {
+      case 0:
+        // ignore: deprecated_member_use
+        launch('https://wa.me/message/OJG5RNHXJSJNB1');
+        break;
+      case 1:
+        about();
+        break;
+      case 2:
+        FirebaseAuth.instance.signOut();
+        break;
+    }
+  }
+
+  void about() {
+    showDialog<String>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: Colors.black.withOpacity(.5),
+          title: const Text("Acerca de"),
+          content: SizedBox(
+            height: 300,
+            width: 300,
+            child: Column(
+              children: [
+                const LogoHidrotec(),
+                TextButton(
+                  onPressed: () {
+                    // ignore: deprecated_member_use
+                    launch("mailto:hidrotecpiscinaseaquecedores@gmail.com");
+                  },
+                  child: const Text("hidrotecpiscinaseaquecedores@gmail.com"),
+                ),
+                const Text('Rua Fioravante Barleze N°110'),
+                const Text('Carazinho'),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () => Navigator.pop(context, 'OK'),
+              child: const Text('OK'),
+            ),
+          ],
+        );
+      },
     );
   }
 }
