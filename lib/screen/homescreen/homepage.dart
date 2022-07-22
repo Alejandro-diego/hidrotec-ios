@@ -110,7 +110,10 @@ class _HomePageState extends State<HomePage> {
                     // ignore: deprecated_member_use
                     launch("mailto:hidrotecpiscinaseaquecedores@gmail.com");
                   },
-                  child: const Text("hidrotecpiscinaseaquecedores@gmail.com"),
+                  child: const Text(
+                    "hidrotecpiscinaseaquecedores@gmail.com",
+                    style: TextStyle(fontSize: 11),
+                  ),
                 ),
                 const Text('Rua Fioravante Barleze N°110'),
                 const Text('Carazinho'),
