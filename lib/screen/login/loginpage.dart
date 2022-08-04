@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hidrotec/screen/login/login_ipad.dart';
 
 import '../../responsive.dart';
 import 'login_tablet.dart';
@@ -22,6 +23,7 @@ class LoginPage extends StatelessWidget {
         child: const Responsive(
           mobile: MobileLoginScrenn(),
           tablet: TabletLoginScrenn(),
+          ipad: IpadLoginScrenn(),
         ),
       ),
     );

@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 class Responsive extends StatelessWidget {
   final Widget mobile;
   final Widget tablet;
-  final Widget? desktop;
+  final Widget? ipad;
 
   const Responsive({
     Key? key,
     required this.mobile,
     required this.tablet,
-    this.desktop,
+    this.ipad,
   }) : super(key: key);
 
   static bool isMobile(BuildContext context) =>
@@ -26,7 +26,7 @@ class Responsive extends StatelessWidget {
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
     if (size.width > 992) {
-      return desktop!;
+      return ipad!;
     } else if (size.width >= 610) {
       return tablet;
     } else {

@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../../responsive.dart';
 import '../../widget/small_logo.dart';
+import 'home_ipad.dart';
 import 'home_movil.dart';
 import 'home_tablet.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -72,6 +73,7 @@ class _HomePageState extends State<HomePage> {
         child: const Responsive(
           mobile: HomePageMovil(),
           tablet: HomePageTablet(),
+          ipad: HomePageIpad(),
         ),
       ),
     );
